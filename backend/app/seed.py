@@ -5,11 +5,15 @@ from app.engines.estimate import estimate_room
 def init_db():
     conn = connect()
     conn.executescript("""
-    CREATE TABLE IF NOT EXISTS rooms(id INTEGER PRIMARY KEY, name TEXT, length REAL, width REAL, height REAL);
+    CREATE TABLE IF NOT EXISTS rooms(id INTEGER PRIMARY KEY, name TEXT, length REAL, width REAL, height REAL, locked INTEGER NOT NULL DEFAULT 0);
     CREATE TABLE IF NOT EXISTS openings(id INTEGER PRIMARY KEY, room_id INTEGER, kind TEXT, w REAL, h REAL);
     CREATE TABLE IF NOT EXISTS settings(key TEXT PRIMARY KEY, value TEXT);
     CREATE TABLE IF NOT EXISTS calc_runs(id INTEGER PRIMARY KEY, kind TEXT, room_id INTEGER, input_json TEXT, result_json TEXT, created_at TEXT);
     """)
+    room_cols = [r["name"] for r in conn.execute("PRAGMA table_info(rooms)").fetchall()]
+    if "locked" not in room_cols:
+        conn.execute("ALTER TABLE rooms ADD COLUMN locked INTEGER NOT NULL DEFAULT 0")
+        conn.commit()
     if conn.execute("SELECT COUNT(*) c FROM rooms").fetchone()["c"] == 0:
         conn.execute("INSERT INTO rooms(name,length,width,height) VALUES ('客厅',5.0,4.0,2.8)")
         conn.execute("INSERT INTO rooms(name,length,width,height) VALUES ('卧室(多种洞)',4.0,3.2,2.8)")
