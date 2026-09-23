@@ -10,3 +10,14 @@ table { width:100%; border-collapse:collapse; }
 th,td { border:1px solid #aacce0; padding:0.35rem; }
 .hero-num { font-size:2rem; color: var(--line); font-weight:700; }
 a { color: var(--line); }
+
+.lock-badge { background:#1a3a4a; color:#ffd98a; border:1px solid #ffd98a; padding:0.15rem 0.5rem; border-radius:4px; font-size:0.85rem; white-space:nowrap; }
+.unlock-badge { color:#3a7ca5; font-size:0.85rem; white-space:nowrap; }
+.lock-hint { background:#fff7e6; border:1px solid #e0b36b; padding:0.5rem; border-radius:4px; }
+.readonly-note { color:#9a6a1a; font-size:0.85rem; margin:0.2rem 0 0.8rem; }
+.msg-error { background:#fde8e8; border:1px solid #d96b6b; color:#8a2424; padding:0.5rem; border-radius:4px; }
+.msg-ok { background:#e8f6ec; border:1px solid #6bb885; color:#1f6b38; padding:0.5rem; border-radius:4px; }
+.locked-fieldset { border:1px dashed #aacce0; border-radius:4px; padding:0.6rem; margin:0.4rem 0; }
+.locked-fieldset.inline { display:inline-flex; gap:0.5rem; align-items:center; border:0; padding:0; }
+.locked-fieldset[disabled] { opacity:0.65; background:#f4f8fb; }
+.btn-danger { background:#b5483f; }
